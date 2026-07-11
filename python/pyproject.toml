@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "resultsza-sdk"
+version = "0.1.0"
+description = "Thin Python client and webhook-receiver toolkit for the ResultsZA API (lottery & horse racing results). Unofficial."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Stefan" }]
+keywords = [
+  "resultsza", "lottery", "lotto", "powerball", "euromillions",
+  "uk49s", "horse-racing", "south-africa", "api", "sdk", "webhook",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+  "httpx>=0.24",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "respx>=0.20",
+]
+
+[project.urls]
+Homepage = "https://resultsza.co.za"
+Documentation = "https://resultsza.co.za/api_docs"
+"API Keys" = "https://resultsza.co.za/generate_api_key"
+"Webhook Docs" = "https://resultsza.co.za/webhook-docs"
+
+[tool.hatch.build.targets.wheel]
+packages = ["resultsza"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

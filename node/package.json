@@ -1,0 +1,56 @@
+{
+  "name": "resultsza-sdk",
+  "version": "0.1.0",
+  "description": "Thin Node/TypeScript client and webhook-receiver toolkit for the ResultsZA API (lottery and horse racing results). Unofficial.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "resultsza",
+    "lottery",
+    "lotto",
+    "powerball",
+    "euromillions",
+    "uk49s",
+    "horse-racing",
+    "south-africa",
+    "api",
+    "sdk",
+    "webhook"
+  ],
+  "author": "Stefan",
+  "license": "MIT",
+  "homepage": "https://resultsza.co.za",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stef1986/resultsza-sdk.git",
+    "directory": "node"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^22",
+    "express": "^5.2.1",
+    "tsup": "^8",
+    "typescript": "^5",
+    "vitest": "^2"
+  }
+}

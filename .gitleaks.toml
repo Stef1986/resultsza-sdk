@@ -1,0 +1,18 @@
+# gitleaks config - extends the built-in ruleset with an allowlist for
+# the intentional placeholders shipped in this repo.
+# Run:  gitleaks detect --source . --redact
+#       gitleaks protect --staged --redact   (pre-commit)
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Documented placeholders - not real secrets"
+regexes = [
+  '''your_api_key_here''',
+  '''your_webhook_secret_here''',
+  '''YOUR_API_KEY''',
+]
+paths = [
+  '''\.env\.example$''',
+  '''\.gitleaks\.toml$''',
+]

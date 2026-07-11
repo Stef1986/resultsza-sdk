@@ -1,0 +1,36 @@
+name: Publish Node to npm
+
+# Manual trigger for now (Run workflow button). Flip to `on: release` once you
+# have an npm account set up. Two ways to authenticate:
+#
+#  A) Trusted Publishing (OIDC, no stored token) - recommended, mirrors PyPI.
+#     Configure a trusted publisher for the package on npmjs.com, then this
+#     workflow's `id-token: write` permission is enough (remove NODE_AUTH_TOKEN).
+#
+#  B) Token - create an npm automation token and add it as the NPM_TOKEN repo
+#     secret (used below). `--provenance` still attests the build via OIDC.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # for npm provenance / trusted publishing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: node
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
