@@ -1,9 +1,18 @@
-# ResultsZA SDK
+<p align="center">
+  <img src="assets/logo.svg" alt="ResultsZA logo" width="88" height="88">
+</p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)](python/)
+<h1 align="center">ResultsZA SDK</h1>
 
-Official SDKs for the [**ResultsZA API**](https://resultsza.co.za/api_docs) - lottery and horse racing results, number tools, result checkers, and webhook delivery. A thin client that makes the API easy to call, plus a toolkit for verifying and consuming webhook pushes.
+<p align="center">Official <b>lottery API</b> and <b>webhook</b> client for Python and Node/TypeScript.</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"></a>
+  <a href="https://pypi.org/project/resultsza-sdk/"><img src="https://img.shields.io/pypi/v/resultsza-sdk?label=PyPI&amp;color=007BFF" alt="PyPI version"></a>
+  <a href="https://www.npmjs.com/package/resultsza-sdk"><img src="https://img.shields.io/npm/v/resultsza-sdk?label=npm&amp;color=007BFF" alt="npm version"></a>
+</p>
+
+The **ResultsZA SDK** is the official Python and Node/TypeScript client for the [**ResultsZA lottery API**](https://resultsza.co.za/api_docs). Fetch **Lotto, Powerball, EuroMillions, UK49s and horse racing results**, generate numbers, check played lines, and verify **lottery webhooks** in a few lines of code - across South Africa, Kenya, Nigeria, Ghana, the UK, Europe and the US.
 
 Bring your own API key - **[get one here](https://resultsza.co.za/generate_api_key)**.
 
@@ -79,6 +88,20 @@ Every request needs an API key tied to an active subscription. Tiers range from 
 - 📚 [API documentation](https://resultsza.co.za/api_docs)
 - 📬 [Webhook documentation](https://resultsza.co.za/webhook-docs)
 - 🌍 [resultsza.co.za (pricing & plans)](https://resultsza.co.za)
+
+## FAQ
+
+**Is there a lottery API for South African and international results?**
+Yes. The ResultsZA API is a lottery results API covering SA Lotto, Lotto Plus 1, Lotto 5 Max, Daily Lotto, Powerball and Powerball Xtra, plus UK49s, EuroMillions, Irish Lotto, US Powerball, Mega Millions, and lotteries in Kenya, Nigeria and Ghana - as well as South African horse racing. This repository is the official Python and Node/TypeScript client for it.
+
+**How do I get Lotto or Powerball results via API?**
+Get an API key, install the SDK (`pip install resultsza-sdk` or `npm install resultsza-sdk`), and call a method such as `get_lotto_results()` or `get_sa_powerball_results()`. See the Quickstart above.
+
+**How do I verify a ResultsZA lottery webhook?**
+The SDK ships HMAC-SHA256 webhook signature verification. Pass the raw request bytes and the `X-ResultsZA-Signature` header to `verify_webhook_signature(...)` (or `verify_and_parse(...)`) - see the Webhooks section. This is the safe way to consume a lottery results webhook.
+
+**Which languages does the SDK support?**
+Python (3.9+) and Node / TypeScript (20+), from a single repository, with matching features and typed clients.
 
 ## Contributing
 

@@ -1,6 +1,6 @@
 # resultsza-sdk (Python)
 
-Thin Python client for the [ResultsZA API](https://resultsza.co.za/api_docs) - lottery and horse racing results, number tools, and result checkers. It builds the request, handles errors, and hands you back the parsed JSON. Nothing more.
+Official Python client for the [ResultsZA lottery API](https://resultsza.co.za/api_docs) - Lotto, Powerball, EuroMillions, UK49s and horse racing results, number tools, result checkers, and lottery webhook verification. It builds the request, handles errors, and hands you back the parsed JSON.
 
 > Official ResultsZA SDK. Not affiliated with the South African National Lottery, UK 49's, or any national lottery or racing operator. Always verify results on the official operator's site before claiming a prize.
 
