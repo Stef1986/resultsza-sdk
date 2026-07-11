@@ -4,13 +4,32 @@ updates:
     directory: "/python"
     schedule:
       interval: "weekly"
+    groups:
+      python:
+        patterns: ["*"]
 
   - package-ecosystem: "npm"
     directory: "/node"
     schedule:
       interval: "weekly"
+    groups:
+      node:
+        patterns: ["*"]
+    ignore:
+      # TypeScript 7 is the new native compiler; the build toolchain
+      # (tsup / rollup-plugin-dts) cannot generate .d.ts files with it yet.
+      # Revisit once the toolchain supports it.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      # Vitest 4+ requires Node 20+, dropping Node 18 which is our supported
+      # floor. Revisit if we raise the minimum Node version.
+      - dependency-name: "vitest"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      actions:
+        patterns: ["*"]
