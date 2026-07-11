@@ -1,10 +1,6 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="ResultsZA logo" width="88" height="88">
+  <a href="https://resultsza.co.za"><img src="assets/social-preview.png" alt="ResultsZA SDK - the official Python and Node/TypeScript client for the ResultsZA lottery API and webhooks (Lotto, Powerball, EuroMillions, UK49s, horse racing)" width="860"></a>
 </p>
-
-<h1 align="center">ResultsZA SDK</h1>
-
-<p align="center">The official <b>ResultsZA</b> SDK: a <b>lottery API</b> and <b>webhook</b> client for Python and Node/TypeScript.</p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"></a>
