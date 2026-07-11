@@ -1,7 +1,6 @@
-"""Thin Python client and webhook-receiver toolkit for the ResultsZA API.
+"""Official Python client and webhook-receiver toolkit for the ResultsZA API.
 
-Unofficial tooling. Requires your own API key from
-https://resultsza.co.za/generate_api_key
+Requires your own API key from https://resultsza.co.za/generate_api_key
 """
 from .client import ResultsZA
 from .exceptions import (
@@ -22,7 +21,7 @@ from .webhook import (
     verify_webhook_signature,
 )
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "ResultsZA",

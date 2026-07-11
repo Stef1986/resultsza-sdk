@@ -2,7 +2,7 @@
 
 Thin Python client for the [ResultsZA API](https://resultsza.co.za/api_docs) - lottery and horse racing results, number tools, and result checkers. It builds the request, handles errors, and hands you back the parsed JSON. Nothing more.
 
-> Unofficial tooling for the ResultsZA API. Not affiliated with the South African National Lottery, UK 49's, or any national lottery or racing operator. Always verify results on the official operator's site before claiming a prize.
+> Official ResultsZA SDK. Not affiliated with the South African National Lottery, UK 49's, or any national lottery or racing operator. Always verify results on the official operator's site before claiming a prize.
 
 ## Install
 

@@ -6,6 +6,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.1]
+
+### Changed
+
+- Corrected the package descriptions and disclaimers to identify these as the official ResultsZA SDKs. The not-affiliated notice now applies specifically to the national lottery and racing operators, which is the accurate scope.
+
 ## [0.1.0]
 
 Initial release - Python and Node/TypeScript SDKs with matching feature sets.
@@ -26,5 +32,6 @@ Initial release - Python and Node/TypeScript SDKs with matching feature sets.
 - Test suites that mock the HTTP layer, so no API key is required to run them (67 Python tests, 49 Node tests).
 - Node package ships ESM + CommonJS builds with TypeScript types and zero runtime dependencies.
 
-[Unreleased]: https://github.com/Stef1986/resultsza-sdk/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/Stef1986/resultsza-sdk/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/Stef1986/resultsza-sdk/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Stef1986/resultsza-sdk/releases/tag/v0.1.0

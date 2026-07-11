@@ -1,7 +1,7 @@
 {
   "name": "resultsza-sdk",
-  "version": "0.1.0",
-  "description": "Thin Node/TypeScript client and webhook-receiver toolkit for the ResultsZA API (lottery and horse racing results). Unofficial.",
+  "version": "0.1.1",
+  "description": "Official Node/TypeScript client and webhook-receiver toolkit for the ResultsZA API (lottery and horse racing results).",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
