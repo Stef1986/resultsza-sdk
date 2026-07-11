@@ -6,6 +6,11 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"></a>
   <a href="https://pypi.org/project/resultsza-sdk/"><img src="https://img.shields.io/pypi/v/resultsza-sdk?label=PyPI&amp;color=007BFF" alt="PyPI version"></a>
   <a href="https://www.npmjs.com/package/resultsza-sdk"><img src="https://img.shields.io/npm/v/resultsza-sdk?label=npm&amp;color=007BFF" alt="npm version"></a>
+  <a href="https://github.com/Stef1986/resultsza-sdk/stargazers"><img src="https://img.shields.io/github/stars/Stef1986/resultsza-sdk?style=flat&amp;color=F8C244&amp;logo=github" alt="GitHub stars"></a>
+</p>
+
+<p align="center">
+  <em>Find it useful? Give it a ⭐ to help more developers discover the ResultsZA lottery API.</em>
 </p>
 
 The **ResultsZA SDK** is the official Python and Node/TypeScript client for the [**ResultsZA lottery API**](https://resultsza.co.za/api_docs). Fetch **Lotto, Powerball, EuroMillions, UK49s and horse racing results**, generate numbers, check played lines, and verify **lottery webhooks** in a few lines of code - across South Africa, Kenya, Nigeria, Ghana, the UK, Europe and the US.
