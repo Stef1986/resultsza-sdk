@@ -10,7 +10,7 @@ Thin Node/TypeScript client for the [ResultsZA API](https://resultsza.co.za/api_
 npm install resultsza-sdk
 ```
 
-Requires Node 18+ (for global `fetch`). Ships ESM and CommonJS builds with TypeScript types.
+Requires Node 20+ (for global `fetch`). Ships ESM and CommonJS builds with TypeScript types.
 
 ## Quickstart
 

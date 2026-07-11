@@ -59,7 +59,7 @@ export class ResultsZA {
     const fetchImpl = options.fetchImpl ?? globalThis.fetch;
     if (!fetchImpl) {
       throw new Error(
-        "global fetch is unavailable. Use Node 18+ or pass a fetchImpl option.",
+        "global fetch is unavailable. Use Node 20+ or pass a fetchImpl option.",
       );
     }
     this.#fetch = fetchImpl;

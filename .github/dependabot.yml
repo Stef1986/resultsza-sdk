@@ -21,10 +21,6 @@ updates:
       # Revisit once the toolchain supports it.
       - dependency-name: "typescript"
         update-types: ["version-update:semver-major"]
-      # Vitest 4+ requires Node 20+, dropping Node 18 which is our supported
-      # floor. Revisit if we raise the minimum Node version.
-      - dependency-name: "vitest"
-        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
