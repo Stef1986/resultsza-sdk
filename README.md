@@ -4,7 +4,7 @@
 
 <h1 align="center">ResultsZA SDK</h1>
 
-<p align="center">Official <b>lottery API</b> and <b>webhook</b> client for Python and Node/TypeScript.</p>
+<p align="center">The official <b>ResultsZA</b> SDK: a <b>lottery API</b> and <b>webhook</b> client for Python and Node/TypeScript.</p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License"></a>
