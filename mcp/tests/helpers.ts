@@ -57,6 +57,7 @@ export function noNetworkClient(apiKey = "test-key"): { client: ResultsZA; fetch
 /** Valid arguments for every tool, so security tests can call them all. */
 export const SAMPLE_ARGS: Record<string, Record<string, unknown>> = {
   check_balance: {},
+  get_lottery_results: { game: "Lotto" },
 };
 
 export async function connect(client: ResultsZALike | FakeClient | null, apiKey?: string): Promise<Client> {
