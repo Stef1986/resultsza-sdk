@@ -60,6 +60,9 @@ export const SAMPLE_ARGS: Record<string, Record<string, unknown>> = {
   get_lottery_results: { game: "Lotto" },
   check_lottery_numbers: { game: "Lotto", date: "2026-08-05", lines: [[5, 20, 21, 36, 1, 13]] },
   bulk_check_lottery_numbers: { game: "Lotto", date: "2026-08-05", lines: [[5, 20, 21, 36, 1, 13]] },
+  get_horse_racing_meetings: {},
+  get_horse_racing_card: { date: "2026-11-01", venue: "Greyville" },
+  get_horse_race: { date: "2026-11-01", venue: "Greyville", race_no: 3 },
 };
 
 export async function connect(client: ResultsZALike | FakeClient | null, apiKey?: string): Promise<Client> {
