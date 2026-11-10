@@ -1,0 +1,32 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "za.co.resultsza/mcp",
+  "title": "ResultsZA",
+  "description": "Official ResultsZA tools for South African and international lottery results.",
+  "websiteUrl": "https://resultsza.co.za/mcp",
+  "repository": {
+    "url": "https://github.com/Stef1986/resultsza-sdk",
+    "source": "github",
+    "subfolder": "mcp"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "resultsza-mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "RESULTSZA_API_KEY",
+          "description": "Your ResultsZA API key (create an account at https://resultsza.co.za/signup)",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

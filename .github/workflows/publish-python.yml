@@ -18,6 +18,8 @@ permissions:
 
 jobs:
   publish:
+    # MCP releases (tags mcp-v*) are published by publish-mcp.yml only.
+    if: ${{ github.event_name != 'release' || !startsWith(github.event.release.tag_name, 'mcp-v') }}
     runs-on: ubuntu-latest
     environment: pypi
     permissions:

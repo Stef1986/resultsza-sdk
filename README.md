@@ -79,6 +79,28 @@ Ships ESM + CommonJS with TypeScript types, and has zero runtime dependencies. F
 
 See the [full endpoints table](python/README.md#supported-endpoints).
 
+## Use with AI assistants (MCP)
+
+The [`mcp/`](mcp/) folder holds the official ResultsZA MCP server, published on npm as
+[`resultsza-mcp`](https://www.npmjs.com/package/resultsza-mcp). Add it to Claude Desktop, Cursor
+or VS Code with your API key and your assistant can look up results, check numbers and get horse
+racing results for you:
+
+```json
+{
+  "mcpServers": {
+    "resultsza": {
+      "command": "npx",
+      "args": ["-y", "resultsza-mcp"],
+      "env": { "RESULTSZA_API_KEY": "YOUR_API_KEY" }
+    }
+  }
+}
+```
+
+Setup for each assistant and the full tool list: [mcp/README.md](mcp/README.md) and
+[resultsza.co.za/mcp](https://resultsza.co.za/mcp).
+
 ## Webhooks
 
 ResultsZA can push results to your endpoint the moment they're published. Register your endpoint URL and get your signing secret in the **[subscriber portal](https://resultsza.co.za/portal/login)** under **Push Settings**; this SDK helps you receive and verify those deliveries safely: verify against raw bytes, respond within 10 seconds, and deduplicate at-least-once deliveries. See the [webhook docs](https://resultsza.co.za/webhook-docs) and the [Flask receiver example](python/examples/webhook_receiver_flask.py).
