@@ -1,6 +1,6 @@
 {
   "name": "resultsza-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Official ResultsZA MCP server: South African lottery results, international lotteries, number tools and SA horse racing for AI assistants, using your own ResultsZA API key.",
   "mcpName": "za.co.resultsza/mcp",
   "type": "module",

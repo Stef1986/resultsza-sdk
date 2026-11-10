@@ -4,6 +4,13 @@ All notable changes to the ResultsZA MCP server are documented here. The format 
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Releases are tagged `mcp-vX.Y.Z`.
 
+## [0.1.1]
+
+### Changed
+
+- `check_balance` on an Unlimited plan now summarises as "used N calls this month (no monthly limit, fair use applies)" instead of "used N of Unlimited (Fair Use) calls".
+- First release published from GitHub Actions with npm Trusted Publishing.
+
 ## [0.1.0]
 
 ### Added

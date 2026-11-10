@@ -5,6 +5,9 @@ import { defineTool } from "./define";
 
 function balanceSummary(data: any): string | null {
   if (!data || typeof data !== "object") return null;
+  if (data.tier && data.used !== undefined && data.is_unlimited === true) {
+    return `Plan: ${data.tier}, used ${data.used} calls this month (no monthly limit, fair use applies).`;
+  }
   if (data.tier && data.used !== undefined && data.monthly_limit !== undefined) {
     return `Plan: ${data.tier}, used ${data.used} of ${data.monthly_limit} calls this month.`;
   }

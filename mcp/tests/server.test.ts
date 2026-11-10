@@ -40,6 +40,15 @@ describe("server basics", () => {
   });
 });
 
+describe("balance summary", () => {
+  it("unlimited_plan_summary_reads_naturally", async () => {
+    const data = { status: "success", tier: "unlimited", used: 450, monthly_limit: "Unlimited (Fair Use)", is_unlimited: true };
+    const mcp = await connect(fakeClient({ checkBalance: vi.fn().mockResolvedValue(data) }));
+    const res: any = await mcp.callTool({ name: "check_balance", arguments: {} });
+    expect(res.content[0].text).toBe("Plan: unlimited, used 450 calls this month (no monthly limit, fair use applies).");
+  });
+});
+
 describe("errors", () => {
   it("rate_limit_error_reports_retry_and_does_not_retry", async () => {
     const err = new RateLimitError("Rate limit exceeded.", 429, { error: "rate_limited", retry_after: 42 });
