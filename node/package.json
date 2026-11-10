@@ -1,7 +1,7 @@
 {
   "name": "resultsza-sdk",
-  "version": "0.1.2",
-  "description": "Official Node/TypeScript client for the ResultsZA lottery API: Lotto, Powerball, EuroMillions, UK49s and horse racing results, plus lottery webhook verification.",
+  "version": "0.2.0",
+  "description": "Official Node/TypeScript client for the ResultsZA lottery API: Lotto, Powerball, EuroMillions, UK49s, Gosloto and horse racing results, plus lottery webhook verification.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -38,6 +38,7 @@
     "uk49s",
     "mega-millions",
     "irish-lotto",
+    "gosloto",
     "daily-lotto",
     "national-lottery",
     "horse-racing",

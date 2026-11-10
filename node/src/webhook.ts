@@ -74,13 +74,17 @@ export class WebhookEvent {
 
   /**
    * Best-effort key for deduplicating at-least-once deliveries. Combines the
-   * game with the most specific draw identifier present. Confirm it fits the
-   * games you subscribe to before relying on it.
+   * game with the most specific identifier present: `race_key` for horse
+   * racing (one push per race, unique per race), else `draw_number` /
+   * `draw_id`, else `draw_date` + `draw_time`. Confirm it fits the games you
+   * subscribe to before relying on it.
    */
   dedupeKey(): string {
     const parts: string[] = [this.game ?? ""];
     const data = this.data;
-    if (data.draw_number != null) {
+    if (data.race_key != null) {
+      parts.push(String(data.race_key));
+    } else if (data.draw_number != null) {
       parts.push(String(data.draw_number));
     } else if (data.draw_id != null) {
       parts.push(String(data.draw_id));

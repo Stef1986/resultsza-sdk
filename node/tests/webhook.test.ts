@@ -95,6 +95,21 @@ describe("envelope parsing", () => {
   });
 });
 
+describe("dedupeKey for horse racing", () => {
+  it("uses race_key so each race gets its own key", () => {
+    const race = (no: number) =>
+      parseEvent(
+        JSON.stringify({
+          event: "result.published",
+          game: "horse_racing",
+          data: { race_date: "2026-06-25", race_key: `2026-06-25-vaal-${no}`, venue: "Vaal", race_no: no },
+        }),
+      );
+    expect(race(1).dedupeKey()).toBe("horse_racing:2026-06-25-vaal-1");
+    expect(race(1).dedupeKey()).not.toBe(race(2).dedupeKey());
+  });
+});
+
 describe("verifyAndParse", () => {
   it("returns the event when the signature is valid", () => {
     const body = JSON.stringify({ event: "result.published", game: "lotto", data: {} });

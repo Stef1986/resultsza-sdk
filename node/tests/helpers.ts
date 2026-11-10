@@ -13,7 +13,7 @@ export interface RecordedCall {
 }
 
 /** A fake `fetch` that records requests and returns a single canned JSON body. */
-export function mockFetch(json: unknown, status = 200) {
+export function mockFetch(json: unknown, status = 200, headers: Record<string, string> = {}) {
   const calls: RecordedCall[] = [];
   const impl = vi.fn(async (input: string | URL | Request, init?: RequestInit) => {
     calls.push({
@@ -23,7 +23,7 @@ export function mockFetch(json: unknown, status = 200) {
     });
     return new Response(JSON.stringify(json), {
       status,
-      headers: { "content-type": "application/json" },
+      headers: { "content-type": "application/json", ...headers },
     });
   });
   return { impl: impl as unknown as typeof fetch, calls };

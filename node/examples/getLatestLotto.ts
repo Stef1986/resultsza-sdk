@@ -3,7 +3,8 @@
  *
  *   RESULTSZA_API_KEY=your_key npx tsx examples/getLatestLotto.ts
  *
- * Get an API key at https://resultsza.co.za/generate_api_key
+ * Create a free account at https://resultsza.co.za/signup, then generate your
+ * API key in My Dashboard.
  */
 // In your project: import { ResultsZA } from "resultsza-sdk";
 import { ResultsZA } from "../src/index";
@@ -20,3 +21,4 @@ console.log(latest);
 //   await client.getUk49sResults({ game: "UK49s Lunchtime" });
 //   await client.generateRandomNumbers({ game: "Powerball", lines: 5 });
 //   await client.getHotColdNumbers({ product: "Lotto" });
+//   await client.getGosloto645Results({ date: "2026-08-06" }); // every draw that day

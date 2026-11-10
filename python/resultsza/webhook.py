@@ -71,13 +71,16 @@ class WebhookEvent:
     def dedupe_key(self):
         """A best-effort key for deduplicating at-least-once deliveries.
 
-        Combines the game with the most specific draw identifier present
-        (``draw_number`` / ``draw_id``, else ``draw_date`` + ``draw_time``).
+        Combines the game with the most specific identifier present:
+        ``race_key`` for horse racing (one push per race, unique per race),
+        else ``draw_number`` / ``draw_id``, else ``draw_date`` + ``draw_time``.
         Confirm it fits the games you subscribe to before relying on it.
         """
         parts = [self.game or ""]
         data = self.data
-        if data.get("draw_number") is not None:
+        if data.get("race_key") is not None:
+            parts.append(str(data["race_key"]))
+        elif data.get("draw_number") is not None:
             parts.append(str(data["draw_number"]))
         elif data.get("draw_id") is not None:
             parts.append(str(data["draw_id"]))

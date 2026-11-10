@@ -2,7 +2,8 @@
 
     RESULTSZA_API_KEY=your_key python get_latest_lotto.py
 
-Get an API key at https://resultsza.co.za/generate_api_key
+Create a free account at https://resultsza.co.za/signup, then generate your
+API key in My Dashboard.
 """
 import os
 
@@ -20,3 +21,4 @@ print(latest)
 #   client.get_uk49s_results(game="UK49s Lunchtime")
 #   client.generate_random_numbers(game="Powerball", lines=5)
 #   client.get_hot_cold_numbers(product="Lotto")
+#   client.get_gosloto_6_45_results(date="2026-08-06")  # every draw that day

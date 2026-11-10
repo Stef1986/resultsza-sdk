@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "resultsza-sdk"
-version = "0.1.2"
-description = "Official Python client for the ResultsZA lottery API: Lotto, Powerball, EuroMillions, UK49s and horse racing results, plus lottery webhook verification."
+version = "0.2.0"
+description = "Official Python client for the ResultsZA lottery API: Lotto, Powerball, EuroMillions, UK49s, Gosloto and horse racing results, plus lottery webhook verification."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
@@ -13,7 +13,7 @@ authors = [{ name = "Stefan" }]
 keywords = [
   "resultsza", "lottery-api", "lotto-api", "lottery-results", "lottery-webhook",
   "lotto-webhook", "lottery", "lotto", "powerball", "euromillions", "uk49s",
-  "mega-millions", "irish-lotto", "daily-lotto", "national-lottery", "horse-racing",
+  "mega-millions", "irish-lotto", "gosloto", "daily-lotto", "national-lottery", "horse-racing",
   "south-africa", "results-api", "api", "sdk", "webhook", "webhook-verification",
 ]
 classifiers = [
@@ -36,7 +36,8 @@ dev = [
 [project.urls]
 Homepage = "https://resultsza.co.za"
 Documentation = "https://resultsza.co.za/api_docs"
-"API Keys" = "https://resultsza.co.za/generate_api_key"
+"API Keys" = "https://resultsza.co.za/signup"
+"Pricing" = "https://resultsza.co.za/api-pricing"
 "Webhook Docs" = "https://resultsza.co.za/webhook-docs"
 
 [tool.hatch.build.targets.wheel]

@@ -3,13 +3,20 @@
  *
  *   RESULTSZA_API_KEY=your_key npx tsx examples/checkPlayedNumbers.ts
  */
-// In your project: import { ResultsZA, APIError, SubscriptionError } from "resultsza-sdk";
-import { APIError, ResultsZA, SubscriptionError } from "../src/index";
+// In your project: import { ... } from "resultsza-sdk";
+import {
+  APIError,
+  AuthError,
+  QuotaExceededError,
+  ResultsZA,
+  SubscriptionError,
+  ValidationError,
+} from "../src/index";
 
 const client = new ResultsZA({ apiKey: process.env.RESULTSZA_API_KEY! });
 
-// Placeholder lines - replace with your own. Up to 10 lines here; use
-// client.bulkCheckNumbers(...) for up to 500.
+// Placeholder lines - replace with your own. Up to 10 lines here (1 call); use
+// client.bulkCheckNumbers(...) for up to 500 lines.
 const playedNumbers = [
   [1, 2, 3, 4, 5, 6],
   [7, 8, 9, 10, 11, 12],
@@ -23,8 +30,15 @@ try {
   });
   console.log(result);
 } catch (err) {
-  if (err instanceof SubscriptionError) {
+  if (err instanceof ValidationError) {
+    // Caught client-side (bad date, too many lines, ...): no request was sent.
+    console.error(`Invalid input: ${err.message}`);
+  } else if (err instanceof QuotaExceededError) {
+    console.error(`Out of calls: ${err.message}`);
+  } else if (err instanceof SubscriptionError) {
     console.error(`Subscription not active: ${err.message}`);
+  } else if (err instanceof AuthError) {
+    console.error(`API key problem: ${err.message}`);
   } else if (err instanceof APIError) {
     console.error(`API error (HTTP ${err.statusCode}): ${err.message}`);
   } else {

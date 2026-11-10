@@ -3,6 +3,7 @@ import httpx
 import pytest
 import respx
 
+from resultsza.exceptions import ValidationError
 from tests.conftest import API_KEY, BASE
 
 # (method_name, path) - all take only an optional `date`.
@@ -84,3 +85,79 @@ def test_uk49s_sends_game(client):
     params = route.calls.last.request.url.params
     assert params["game"] == "UK49s Lunchtime"
     assert params["date"] == "2026-06-03"
+
+
+# --- Gosloto -------------------------------------------------------------
+
+GOSLOTO = [
+    ("get_gosloto_6_45_results", "/api/get_gosloto_6_45_results"),
+    ("get_gosloto_7_49_results", "/api/get_gosloto_7_49_results"),
+    ("get_gosloto_5_36_results", "/api/get_gosloto_5_36_results"),
+]
+
+
+@respx.mock
+@pytest.mark.parametrize("method_name,path", GOSLOTO)
+def test_gosloto_latest_date_and_draw_id(client, method_name, path):
+    route = respx.get(f"{BASE}{path}").mock(
+        return_value=httpx.Response(200, json={"status": "success", "results": []})
+    )
+    method = getattr(client, method_name)
+
+    method()  # latest draw: no optional params sent
+    params = route.calls.last.request.url.params
+    assert params["api_key"] == API_KEY
+    assert "date" not in params and "draw_id" not in params
+
+    method(date="2026-08-06")
+    assert route.calls.last.request.url.params["date"] == "2026-08-06"
+
+    method(draw_id=18325)  # ints are sent as strings
+    assert route.calls.last.request.url.params["draw_id"] == "18325"
+
+
+@respx.mock
+@pytest.mark.parametrize("method_name,path", GOSLOTO)
+def test_gosloto_rejects_bad_date(client, method_name, path):
+    route = respx.get(f"{BASE}{path}").mock(return_value=httpx.Response(200, json={}))
+    with pytest.raises(ValidationError):
+        getattr(client, method_name)(date="06-08-2026")
+    assert not route.called
+
+
+# --- client-side date validation -----------------------------------------
+
+DATE_METHODS = [name for name, _ in DATE_ONLY] + [
+    "get_kenya_lotto_results",
+    "get_nigeria_lotto_results",
+    "get_ghana_lotto_results",
+] + [name for name, _ in GOSLOTO]
+
+BAD_DATES = ["2026-6-3", "03/06/2026", "2026-02-30", "2026-06-03T00:00", " 2026-06-03", 20260603]
+
+
+@respx.mock
+@pytest.mark.parametrize("method_name", DATE_METHODS)
+@pytest.mark.parametrize("bad", BAD_DATES)
+def test_bad_dates_rejected_before_any_request(client, method_name, bad):
+    route = respx.route().mock(return_value=httpx.Response(200, json={"status": "success"}))
+    with pytest.raises(ValidationError):
+        getattr(client, method_name)(date=bad)
+    assert not route.called
+
+
+@respx.mock
+def test_uk49s_rejects_bad_date(client):
+    route = respx.route().mock(return_value=httpx.Response(200, json={"status": "success"}))
+    with pytest.raises(ValidationError):
+        client.get_uk49s_results(game="UK49s Lunchtime", date="2026-02-29")
+    assert not route.called
+
+
+@respx.mock
+def test_leap_day_is_a_real_date(client):
+    route = respx.get(f"{BASE}/api/get_lotto_results").mock(
+        return_value=httpx.Response(200, json={"status": "success"})
+    )
+    client.get_lotto_results(date="2028-02-29")
+    assert route.calls.last.request.url.params["date"] == "2028-02-29"

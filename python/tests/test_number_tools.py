@@ -5,6 +5,7 @@ import httpx
 import pytest
 import respx
 
+from resultsza.exceptions import ValidationError
 from tests.conftest import API_KEY, BASE
 
 
@@ -88,3 +89,24 @@ def test_number_pairs_sends_product(client):
     )
     client.get_number_pairs(product="Lotto")
     assert route.calls.last.request.url.params["product"] == "Lotto"
+
+
+@respx.mock
+@pytest.mark.parametrize("bad", [0, -1, 501, 2.5, "5", True])
+def test_generate_random_numbers_rejects_bad_lines_without_calling(client, bad):
+    route = respx.get(f"{BASE}/api/generate_random_numbers").mock(
+        return_value=httpx.Response(200, json={"status": "success"})
+    )
+    with pytest.raises(ValidationError):
+        client.generate_random_numbers(game="Lotto", lines=bad)
+    assert not route.called
+
+
+@respx.mock
+@pytest.mark.parametrize("ok", [1, 500])
+def test_generate_random_numbers_accepts_line_bounds(client, ok):
+    route = respx.get(f"{BASE}/api/generate_random_numbers").mock(
+        return_value=httpx.Response(200, json={"status": "success"})
+    )
+    client.generate_random_numbers(game="Gosloto 6/45", lines=ok)
+    assert route.calls.last.request.url.params["lines"] == str(ok)

@@ -107,6 +107,29 @@ def test_dedupe_key_falls_back_to_date_and_time():
     assert ev.dedupe_key() == "PREMIER PEOPLES:2026-06-25:14:00"
 
 
+def test_dedupe_key_horse_racing_uses_race_key():
+    # Horse-racing pushes carry race_key + race_date, not draw fields; without
+    # race_key every race would collapse to the same key.
+    def race(no):
+        return parse_event(
+            json.dumps(
+                {
+                    "event": "result.published",
+                    "game": "horse_racing",
+                    "data": {
+                        "race_date": "2026-06-25",
+                        "race_key": f"2026-06-25-vaal-{no}",
+                        "venue": "Vaal",
+                        "race_no": no,
+                    },
+                }
+            ).encode()
+        )
+
+    assert race(1).dedupe_key() == "horse_racing:2026-06-25-vaal-1"
+    assert race(1).dedupe_key() != race(2).dedupe_key()
+
+
 # --- verify_and_parse -----------------------------------------------------
 
 

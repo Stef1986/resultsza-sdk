@@ -68,5 +68,5 @@ def test_api_key_redacted_in_raised_error():
         return_value=httpx.Response(400, json={"status": "error", "message": "bad date"})
     )
     with pytest.raises(BadRequestError) as exc:
-        make_client().get_lotto_results(date="nonsense")
+        make_client().get_lotto_results(date="2026-06-03")
     assert "test-key-123" not in str(exc.value)
