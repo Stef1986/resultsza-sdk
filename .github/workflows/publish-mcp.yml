@@ -1,6 +1,7 @@
 name: Publish MCP server to npm
 
-# Publishes the resultsza-mcp package (mcp/) via npm Trusted Publishing (OIDC).
+# Stages the resultsza-mcp package (mcp/) via npm Trusted Publishing (OIDC);
+# a maintainer approves the staged version with 2FA before it goes live.
 # Runs only for releases tagged mcp-vX.Y.Z; SDK releases (vX.Y.Z) are ignored here,
 # and the SDK publish workflows ignore mcp-v* releases.
 #
@@ -44,4 +45,7 @@ jobs:
       - run: npm audit --omit=dev --audit-level=high
       - run: npm test
       - run: npm run build
-      - run: npm publish --provenance --access public
+      # Stage-only trusted publisher: the version waits in npm's staging area
+      # until a maintainer approves it with 2FA (npmjs.com > Staged Packages,
+      # or `npm stage approve`). Provenance is added automatically.
+      - run: npm stage publish --access public
