@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import type { ResultsZA } from "resultsza-sdk";
 import { registerAccountTools } from "./tools/account";
+import { registerCheckerTools } from "./tools/checkers";
 import { registerResultsTools } from "./tools/results";
 
 /** The SDK methods the tools call (lets tests pass a fake client). */
@@ -55,5 +56,6 @@ export function createServer(opts: CreateServerOptions): McpServer {
   const ctx: ToolContext = { client: opts.client, apiKey: opts.apiKey };
   registerAccountTools(server, ctx);
   registerResultsTools(server, ctx);
+  registerCheckerTools(server, ctx);
   return server;
 }
