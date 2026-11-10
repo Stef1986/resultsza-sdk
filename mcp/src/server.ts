@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/server";
 import type { ResultsZA } from "resultsza-sdk";
 import { registerAccountTools } from "./tools/account";
 import { registerCheckerTools } from "./tools/checkers";
+import { registerNumberTools } from "./tools/numbers";
 import { registerRacingTools } from "./tools/racing";
 import { registerResultsTools } from "./tools/results";
 
@@ -59,5 +60,6 @@ export function createServer(opts: CreateServerOptions): McpServer {
   registerResultsTools(server, ctx);
   registerCheckerTools(server, ctx);
   registerRacingTools(server, ctx);
+  registerNumberTools(server, ctx);
   return server;
 }

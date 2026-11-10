@@ -63,6 +63,9 @@ export const SAMPLE_ARGS: Record<string, Record<string, unknown>> = {
   get_horse_racing_meetings: {},
   get_horse_racing_card: { date: "2026-11-01", venue: "Greyville" },
   get_horse_race: { date: "2026-11-01", venue: "Greyville", race_no: 3 },
+  generate_lottery_numbers: { game: "Lotto" },
+  lucky_numbers_from_text: { game: "Lotto", text: "John Doe" },
+  get_number_statistics: { kind: "hot_cold", product: "Lotto" },
 };
 
 export async function connect(client: ResultsZALike | FakeClient | null, apiKey?: string): Promise<Client> {
