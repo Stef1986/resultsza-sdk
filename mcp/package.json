@@ -1,0 +1,59 @@
+{
+  "name": "resultsza-mcp",
+  "version": "0.1.0",
+  "description": "Official ResultsZA MCP server: South African lottery results, international lotteries, number tools and SA horse racing for AI assistants, using your own ResultsZA API key.",
+  "mcpName": "za.co.resultsza/mcp",
+  "type": "module",
+  "bin": {
+    "resultsza-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "server.json"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "lottery",
+    "lottery-api",
+    "south-africa",
+    "lotto",
+    "powerball",
+    "resultsza"
+  ],
+  "author": "ResultsZA <info@resultsza.co.za>",
+  "license": "MIT",
+  "homepage": "https://resultsza.co.za/mcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stef1986/resultsza-sdk.git",
+    "directory": "mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/Stef1986/resultsza-sdk/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.4.0",
+    "resultsza-sdk": "0.2.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.4.0",
+    "@types/node": "26.6.6",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1"
+  }
+}
