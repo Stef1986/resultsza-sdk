@@ -63,6 +63,44 @@ describe("errors", () => {
     }
   });
 
+  it("real_sdk_network_failure_says_could_not_reach_without_key", async () => {
+    const fetch = vi.fn(async () => {
+      throw new TypeError("fetch failed for https://resultsza.co.za/x?api_key=SECRETKEY");
+    });
+    const mcp = await connect(buildClient("SECRETKEY", fetch as unknown as typeof globalThis.fetch), "SECRETKEY");
+    const res: any = await mcp.callTool({ name: "check_balance", arguments: {} });
+    expect(res.isError).toBe(true);
+    const text = resultText(res);
+    expect(text.startsWith("Could not reach ResultsZA")).toBe(true);
+    expect(text).not.toContain("SECRETKEY");
+  });
+
+  it("real_sdk_timeout_says_timed_out", async () => {
+    const fetch = vi.fn(async () => {
+      throw new DOMException("This operation was aborted", "AbortError");
+    });
+    const mcp = await connect(buildClient("SECRETKEY", fetch as unknown as typeof globalThis.fetch), "SECRETKEY");
+    const res: any = await mcp.callTool({ name: "check_balance", arguments: {} });
+    expect(res.isError).toBe(true);
+    expect(resultText(res)).toBe("Could not reach ResultsZA: the request timed out. Try again in a minute.");
+  });
+
+  it("real_sdk_server_error_says_try_later", async () => {
+    const fetch = vi.fn(async () => new Response("<html>Bad gateway</html>", { status: 502 }));
+    const mcp = await connect(buildClient("SECRETKEY", fetch as unknown as typeof globalThis.fetch), "SECRETKEY");
+    const res: any = await mcp.callTool({ name: "check_balance", arguments: {} });
+    expect(res.isError).toBe(true);
+    expect(resultText(res)).toBe("ResultsZA returned a server error (HTTP 502). Try again in a few minutes.");
+  });
+
+  it("real_sdk_not_found_keeps_api_message", async () => {
+    const fetch = vi.fn(async () => new Response(JSON.stringify({ status: "error", message: "No results found" }), { status: 404 }));
+    const mcp = await connect(buildClient("SECRETKEY", fetch as unknown as typeof globalThis.fetch), "SECRETKEY");
+    const res: any = await mcp.callTool({ name: "get_lottery_results", arguments: { game: "Lotto", date: "2026-11-09" } });
+    expect(res.isError).toBe(true);
+    expect(resultText(res)).toBe("No results found");
+  });
+
   it("network_error_message_has_no_key", async () => {
     const err = new TypeError("fetch failed for https://resultsza.co.za/check_api_key_balance?api_key=SECRETKEY");
     const mcp = await connect(fakeClient({ checkBalance: vi.fn().mockRejectedValue(err) }), "SECRETKEY");
@@ -110,6 +148,17 @@ describe("security", () => {
       delete process.env.RESULTSZA_BASE_URL;
       delete process.env.RESULTSZA_API_URL;
     }
+  });
+
+  it("redirects_are_refused_so_the_key_cannot_follow_them", async () => {
+    const fetch = vi.fn(async (_url: unknown, init?: RequestInit) => {
+      expect(init?.redirect).toBe("error");
+      return new Response(JSON.stringify({ status: "success" }), { status: 200 });
+    });
+    const client = buildClient("abc", fetch as unknown as typeof globalThis.fetch);
+    await client.checkBalance();
+    await client.getLottoResults({});
+    expect(fetch).toHaveBeenCalledTimes(2);
   });
 
   it("unknown_arguments_rejected", async () => {

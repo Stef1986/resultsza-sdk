@@ -1,15 +1,12 @@
 import { execSync } from "node:child_process";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { beforeAll, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { Client } from "@modelcontextprotocol/client";
 import { StdioClientTransport, getDefaultEnvironment } from "@modelcontextprotocol/client/stdio";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 
-beforeAll(() => {
-  execSync("npm run build", { cwd: ROOT, stdio: "ignore" });
-}, 120_000);
 
 function filesUnder(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
@@ -47,14 +44,24 @@ describe("security", () => {
     const files = [...filesUnder(join(ROOT, "src")), join(ROOT, "dist", "index.js")];
     for (const f of files) {
       const text = readFileSync(f, "utf8");
-      for (const banned of ["child_process", "node:fs", 'from "fs"', "require(\"fs\")", "eval(", "new Function"]) {
+      for (const banned of [
+        "child_process", "node:fs", 'from "fs"', "require(\"fs\")", "eval(", "new Function",
+        "node:http", "node:https", "node:net", "node:dns", "node:dgram", "node:worker_threads",
+        "import(", "fetch(", "XMLHttpRequest", "WebSocket",
+      ]) {
         expect(text.includes(banned), `${banned} in ${f}`).toBe(false);
       }
     }
   });
 
+  it("publishing_always_builds_and_tests_first", () => {
+    const pkg = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8"));
+    expect(pkg.scripts.prepack).toBe("npm run build");
+    expect(pkg.scripts.prepublishOnly).toBe("npm run typecheck && npm test");
+  });
+
   it("packed_files_are_allowlisted", () => {
-    const out = execSync("npm pack --dry-run --json", { cwd: ROOT, encoding: "utf8" });
+    const out = execSync("npm pack --dry-run --json --ignore-scripts", { cwd: ROOT, encoding: "utf8" });
     const files: string[] = JSON.parse(out)[0].files.map((f: { path: string }) => f.path).sort();
     expect(files).toEqual(["LICENSE", "README.md", "dist/index.js", "package.json", "server.json"]);
   });

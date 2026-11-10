@@ -40,7 +40,11 @@ const schema = z.strictObject({
     .max(60)
     .optional()
     .describe('Nigeria or Ghana only: one draw, e.g. "PREMIER BINGO" or "Ghana Lucky Tuesday". Omit for all.'),
-  draw_id: z.string().max(20).optional().describe("Gosloto only: one draw by its number (ignored when date is given)."),
+  draw_id: z
+    .string()
+    .regex(/^[0-9]{1,20}$/, "draw_id must be the draw number (digits only).")
+    .optional()
+    .describe("Gosloto only: one draw by its number (ignored when date is given)."),
 });
 
 type Args = z.infer<typeof schema>;

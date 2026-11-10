@@ -1,4 +1,4 @@
-import { RateLimitError, ResultsZAError } from "resultsza-sdk";
+import { APIError, RateLimitError } from "resultsza-sdk";
 import type { ResultsZALike } from "./server";
 
 export const MISSING_KEY_MESSAGE =
@@ -15,8 +15,16 @@ export function redact(text: string, apiKey?: string): string {
   return out;
 }
 
+/**
+ * What the assistant is told when a call fails. The SDK raises APIError (or a
+ * subclass) for any HTTP answer and a plain ResultsZAError when the request
+ * never got an answer (network failure, timeout).
+ */
 function errorText(err: unknown): string {
-  if (err instanceof ResultsZAError) {
+  if (err instanceof APIError) {
+    if (err.statusCode !== undefined && err.statusCode >= 500) {
+      return `ResultsZA returned a server error (HTTP ${err.statusCode}). Try again in a few minutes.`;
+    }
     let msg = err.message;
     if (err instanceof RateLimitError && err.retryAfter !== undefined) {
       msg += ` Retry after ${err.retryAfter} seconds.`;
@@ -24,6 +32,9 @@ function errorText(err: unknown): string {
     return msg;
   }
   const detail = err instanceof Error ? err.message : String(err);
+  if (/abort/i.test(detail) || (err instanceof Error && err.name === "AbortError")) {
+    return "Could not reach ResultsZA: the request timed out. Try again in a minute.";
+  }
   return `Could not reach ResultsZA: ${detail}`;
 }
 

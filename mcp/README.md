@@ -93,12 +93,12 @@ All tools are read-only.
 | `get_number_statistics` | Hot and cold numbers, frequencies or common pairs | 1 call |
 | `check_balance` | Your plan, calls used and calls left | Free |
 
-Calls come from your ResultsZA plan, exactly as if you called the API yourself. Requests with invalid input (for example a date that is not YYYY-MM-DD, or an unknown game) are rejected before they use a call.
+Calls come from your ResultsZA plan, exactly as if you called the API yourself. Badly formed requests (for example a date that is not YYYY-MM-DD, or an unknown game) are rejected before they use a call. A valid request that finds nothing, such as an unknown racecourse, still uses one.
 
 ## Privacy and security
 
-- Your API key stays on your machine. It is only ever sent to `https://resultsza.co.za`, and the address cannot be changed.
-- The key is never written to logs or returned in any tool result.
+- Your API key stays on your machine. It is only ever sent to `https://resultsza.co.za`; the address cannot be changed and redirects are refused.
+- The MCP server never writes your key to its logs or returns it in any tool result.
 - ResultsZA never sees your conversations with your assistant.
 - The server cannot run commands or read or write files on your computer.
 

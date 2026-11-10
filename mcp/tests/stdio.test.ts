@@ -1,6 +1,5 @@
-import { execSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import { beforeAll, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { Client } from "@modelcontextprotocol/client";
 import { StdioClientTransport, getDefaultEnvironment } from "@modelcontextprotocol/client/stdio";
 import { VERSION } from "../src/version";
@@ -18,9 +17,6 @@ const EXPECTED_TOOLS = [
   "get_number_statistics",
 ];
 
-beforeAll(() => {
-  execSync("npm run build", { cwd: new URL("..", import.meta.url), stdio: "ignore" });
-}, 120_000);
 
 describe("stdio", () => {
   it("spawns_built_server_and_lists_10_tools", async () => {

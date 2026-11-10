@@ -82,6 +82,8 @@ describe("get_lottery_results", () => {
       { game: "Lotto", baseUrl: "https://evil.example" },
       { game: "Nigeria Lotto", draw_name: "X".repeat(61) },
       { game: "Gosloto 6/45", draw_id: "1".repeat(21) },
+      { game: "Gosloto 6/45", draw_id: "abc" },
+      { game: "Gosloto 7/49", draw_id: "12 OR 1=1" },
       { game: "Not A Game" },
     ];
     for (const args of bad) {
