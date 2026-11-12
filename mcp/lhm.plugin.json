@@ -1,0 +1,11 @@
+{
+  "identifier": "resultsza-mcp",
+  "name": "ResultsZA",
+  "version": "0.1.1",
+  "description": "Official ResultsZA MCP server: South African lottery results, number checking, hot and cold numbers and SA horse racing results in Claude, Cursor and VS Code. Uses your own ResultsZA API key.",
+  "author": "ResultsZA",
+  "authorUrl": "https://resultsza.co.za",
+  "homepage": "https://resultsza.co.za/mcp",
+  "icon": "https://resultsza.co.za/static/images/icon-512.png",
+  "tags": ["lottery", "south-africa", "lotto", "powerball", "horse-racing", "lottery-api"]
+}
